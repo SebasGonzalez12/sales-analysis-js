@@ -20,3 +20,11 @@ const records = lines.slice(1).map(line => {
 });
 
 console.log(records);
+
+const totalSales = records.reduce((sum, record) => {
+  const quantity = Number(record.quantity);
+  const price = Number(record.unit_price);
+  return sum + quantity * price;
+}, 0);
+
+console.log("Total de ventas:", totalSales);
