@@ -45,6 +45,24 @@ const averageSales = count > 0 ? total / count : 0;
 
 console.log("Promedio de ventas:", averageSales);
 
+// Calcular ventas por producto
+const salesByProduct = {};
+
+records.forEach(record => {
+  const product = record.product;
+  const value = Number(record.total);
+
+  if (!isNaN(value)) {
+    if (!salesByProduct[product]) {
+      salesByProduct[product] = 0;
+    }
+    salesByProduct[product] += value;
+  }
+});
+
+console.log("Ventas por producto:");
+console.log(salesByProduct);
+
 // Exportar ventas por producto a CSV
 let csvContent = "product,total_sales\n";
 
