@@ -1,3 +1,8 @@
+console.log("PRIMERAS LINEAS DEL CSV:");
+console.log(lines.slice(0, 5));
+console.log("HEADERS:", headers);
+
+
 const fs = require("fs");
 
 // Leer CSV
