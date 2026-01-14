@@ -1,8 +1,3 @@
-console.log("PRIMERAS LINEAS DEL CSV:");
-console.log(lines.slice(0, 5));
-console.log("HEADERS:", headers);
-
-
 const fs = require("fs");
 
 // Leer CSV
@@ -16,6 +11,12 @@ const headers = lines[0]
   .split(";")
   .map(header => header.trim());
 
+// 🔍 INSPECCIÓN REAL DEL CSV
+console.log("PRIMERAS LINEAS DEL CSV:");
+console.log(lines.slice(0, 5));
+console.log("HEADERS:", headers);
+
+// Convertir a objetos
 const records = lines
   .slice(1)
   .filter(line => line.trim() !== "")
@@ -35,15 +36,12 @@ const totalSales = records.reduce((sum, record) => {
 
 console.log("Total de ventas:", totalSales);
 
-
-
-// 3. Calcular promedio de ventas
+// Calcular promedio
 let total = 0;
 let count = 0;
 
 records.forEach(record => {
   const value = Number(record.total);
-
   if (!isNaN(value)) {
     total += value;
     count++;
@@ -51,7 +49,6 @@ records.forEach(record => {
 });
 
 const averageSales = count > 0 ? total / count : 0;
-
 console.log("Promedio de ventas:", averageSales);
 
 // Calcular ventas por producto
