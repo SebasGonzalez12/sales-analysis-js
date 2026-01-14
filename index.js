@@ -1,51 +1,44 @@
-const fs = require("fs");
+const fs = require('fs');
+const path = require('path');
 
-// Leer CSV
-const data = fs.readFileSync("sales_data.csv", "utf8");
+// Ruta del archivo CSV
+const filePath = path.join(__dirname, 'sales_data.csv');
 
-// Separar líneas
-const lines = data.split("\n");
+// Leer el archivo
+const data = fs.readFileSync(filePath, 'utf8');
 
-// Encabezados (Excel en español usa ;)
-const headers = lines[0]
-  .split(";")
-  .map(h => h.trim());
+// Separar filas
+const rows = data.split('\n');
 
-// Convertir a objetos
-const records = lines
-  .slice(1)
-  .filter(line => line.trim() !== "")
-  .map(line => {
-    const values = line.split(";");
-    const obj = {};
-    headers.forEach((header, index) => {
-      obj[header] = values[index]?.trim();
-    });
-    return obj;
-  });
+// Quitar la fila de encabezado
+const header = rows.shift();
 
-// Calcular total de ventas (quitando puntos de miles)
-const totalSales = records.reduce((sum, record) => {
-  const cleanNumber = record.total.replace(/\./g, "");
-  return sum + Number(cleanNumber);
-}, 0);
+// Inicializar total
+let totalVentas = 0;
 
-console.log("Total de ventas:", totalSales);
-
-// Calcular promedio
-let total = 0;
+// Contador de filas válidas
 let count = 0;
 
-records.forEach(record => {
-  const cleanNumber = record.total.replace(/\./g, "");
-  const value = Number(cleanNumber);
+// Recorrer cada fila
+rows.forEach(row => {
+  if (row.trim() === '') return; // Ignorar filas vacías
 
-  if (!isNaN(value)) {
-    total += value;
+  const columns = row.split(','); // Suponiendo que el CSV usa coma como separador de columnas
+  let venta = columns[1]; // Suponiendo que la columna 2 tiene la venta
+
+  // Normalizar número: quitar puntos de miles y cambiar coma decimal por punto
+  venta = venta.replace(/\./g, '').replace(',', '.');
+
+  // Convertir a número
+  const ventaNum = parseFloat(venta);
+
+  if (!isNaN(ventaNum)) {
+    totalVentas += ventaNum;
     count++;
   }
 });
 
-const averageSales = count > 0 ? total / count : 0;
+const promedio = count > 0 ? totalVentas / count : 0;
 
-console.log("Promedio de ventas:", averageSales);
+console.log(`Total de ventas: ${totalVentas.toFixed(2)}`);
+console.log(`Promedio de ventas: ${promedio.toFixed(2)}`);
