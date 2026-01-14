@@ -8,22 +8,20 @@ const lines = data.split("\n");
 
 // Encabezados
 const headers = lines[0]
-  .split(",")
+  .split(";")
   .map(header => header.trim());
 
-// Convertir a objetos
 const records = lines
   .slice(1)
   .filter(line => line.trim() !== "")
   .map(line => {
-    const values = line.split(",");
+    const values = line.split(";");
     const obj = {};
     headers.forEach((header, index) => {
       obj[header] = values[index]?.trim();
     });
     return obj;
   });
-
 
 // Calcular total de ventas
 const totalSales = records.reduce((sum, record) => {
