@@ -1,3 +1,5 @@
+console.log("Ejecutando la versión CORRECTA de index.js");
+
 const fs = require('fs');
 const path = require('path');
 
