@@ -25,3 +25,22 @@ const totalSales = records.reduce((sum, record) => {
 }, 0);
 
 console.log("Total de ventas:", totalSales);
+
+
+
+// 3. Calcular promedio de ventas
+let total = 0;
+let count = 0;
+
+records.forEach(record => {
+  const value = Number(record.total);
+
+  if (!isNaN(value)) {
+    total += value;
+    count++;
+  }
+});
+
+const averageSales = count > 0 ? total / count : 0;
+
+console.log("Promedio de ventas:", averageSales);
