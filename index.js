@@ -10,14 +10,18 @@ const lines = data.split("\n");
 const headers = lines[0].split(",");
 
 // Convertir a objetos
-const records = lines.slice(1).map(line => {
-  const values = line.split(",");
-  const obj = {};
-  headers.forEach((header, index) => {
-    obj[header] = values[index];
+const records = lines
+  .slice(1)
+  .filter(line => line.trim() !== "")
+  .map(line => {
+    const values = line.split(",");
+    const obj = {};
+    headers.forEach((header, index) => {
+      obj[header] = values[index];
+    });
+    return obj;
   });
-  return obj;
-});
+
 
 // Calcular total de ventas
 const totalSales = records.reduce((sum, record) => {
