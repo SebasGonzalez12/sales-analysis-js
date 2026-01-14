@@ -44,3 +44,17 @@ records.forEach(record => {
 const averageSales = count > 0 ? total / count : 0;
 
 console.log("Promedio de ventas:", averageSales);
+
+//
+
+const fs = require("fs");
+
+let csvContent = "product,total_sales\n";
+
+for (const product in salesByProduct) {
+  csvContent += `${product},${salesByProduct[product]}\n`;
+}
+
+fs.writeFileSync("sales_by_product.csv", csvContent);
+
+console.log("Archivo sales_by_product.csv creado");
