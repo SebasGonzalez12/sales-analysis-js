@@ -45,10 +45,7 @@ const averageSales = count > 0 ? total / count : 0;
 
 console.log("Promedio de ventas:", averageSales);
 
-//
-
-const fs = require("fs");
-
+// Exportar ventas por producto a CSV
 let csvContent = "product,total_sales\n";
 
 for (const product in salesByProduct) {
