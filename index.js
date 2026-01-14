@@ -7,7 +7,9 @@ const data = fs.readFileSync("sales_data.csv", "utf8");
 const lines = data.split("\n");
 
 // Encabezados
-const headers = lines[0].split(",");
+const headers = lines[0]
+  .split(",")
+  .map(header => header.trim());
 
 // Convertir a objetos
 const records = lines
@@ -17,7 +19,7 @@ const records = lines
     const values = line.split(",");
     const obj = {};
     headers.forEach((header, index) => {
-      obj[header] = values[index];
+      obj[header] = values[index]?.trim();
     });
     return obj;
   });
