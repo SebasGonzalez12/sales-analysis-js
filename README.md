@@ -1,4 +1,3 @@
-🐙 Descripción para GitHub (README o repo)
 📊 Análisis de ventas desde un archivo CSV con Node.js
 
 Este proyecto muestra cómo leer y procesar un archivo CSV en Node.js para calcular el total y el promedio de ventas de manera eficiente.
