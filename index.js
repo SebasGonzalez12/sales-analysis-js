@@ -15,7 +15,7 @@ fs.createReadStream(filePath)
       const quantityKey = Object.keys(row).find(k => k.toLowerCase().includes('quantity'));
       const priceKey = Object.keys(row).find(k => k.toLowerCase().includes('unit_price') || k.toLowerCase().includes('price'));
 
-      if (!quantityKey || !priceKey) return; // Si no existen las columnas, ignorar fila
+      if (!quantityKey || !priceKey) return; // Si no existen las columnas, ignorar fila 
 
       // Trim y conversión a número
       const quantityStr = row[quantityKey]?.trim().replace(/[^0-9]/g, '');
