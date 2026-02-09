@@ -6,7 +6,6 @@ const filePath = path.join(__dirname, 'sales_data.csv');
 
 let totalVentas = 0;
 let count = 0;
-let ventastotales = 1;
 
 fs.createReadStream(filePath)
   .pipe(csv())
